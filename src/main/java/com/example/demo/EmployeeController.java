@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 
@@ -30,7 +31,7 @@ public class EmployeeController {
         return employees;
     }
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public Employee getEmpbyId(@PathVariable int id) {
         for (Employee emp : employees) {
             if (emp.getId() == id) {
@@ -41,6 +42,17 @@ public class EmployeeController {
         return null;
     }
 
+    @PutMapping("/{id}")
+    public String updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) {
+        for (Employee emp : employees) {
+            if (emp.getId() == id) {
+                emp.setName(updatedEmployee.getName());
+                emp.setSalary(updatedEmployee.getSalary());
+                return "Employee updated successfully";
+            }
+        }
+        return "Employee not found";
+    }
     @DeleteMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable int id){
         for (Employee emp : employees) {
