@@ -30,6 +30,17 @@ public class EmployeeController {
         return employees;
     }
 
+    @GetMapping("/{id")
+    public Employee getEmpbyId(@PathVariable int id) {
+        for (Employee emp : employees) {
+            if (emp.getId() == id) {
+                return emp;
+
+            }
+        }
+        return null;
+    }
+
     @DeleteMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable int id){
         for (Employee emp : employees) {
