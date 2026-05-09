@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +23,7 @@ public class EmployeeController {
     List<Employee> employees = new ArrayList<>();
 
     @PostMapping("/addEmployee")
-    public String addemployee(@RequestBody Employee employee) {
+    public String addemployee(@Valid @RequestBody Employee employee) {
         employees.add(employee);
 
         return "Employee added successfully";
@@ -43,7 +46,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public String updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) {
+    public String updateEmployee(@PathVariable int id, @Valid @RequestBody Employee updatedEmployee) {
         for (Employee emp : employees) {
             if (emp.getId() == id) {
                 emp.setName(updatedEmployee.getName());

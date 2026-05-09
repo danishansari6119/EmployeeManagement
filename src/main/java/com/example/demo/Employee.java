@@ -1,8 +1,16 @@
 package com.example.demo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class Employee {
-    int id,salary;
+    int id;
+
+    @NotBlank(message = "Name cannot be blank")
     String name;
+
+    @Positive(message = "Salary cannot be negative")
+    int salary;
 
     public void setSalary(int salary) {
         this.salary = salary;
